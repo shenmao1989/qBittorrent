@@ -1231,47 +1231,47 @@ QString options_imp::languageToLocalizedString(QLocale::Language language, const
 {
   switch(language) {
   case QLocale::English: return "English";
-  case QLocale::French: return QString::fromUtf8("Fran√ßais");
+  case QLocale::French: return QString::fromUtf8("Fran?ais");
   case QLocale::German: return QString::fromUtf8("Deutsch");
   case QLocale::Hungarian: return QString::fromUtf8("Magyar");
   case QLocale::Italian: return QString::fromUtf8("Italiano");
   case QLocale::Dutch: return QString::fromUtf8("Nederlands");
-  case QLocale::Spanish: return QString::fromUtf8("Espa√±ol");
-  case QLocale::Catalan: return QString::fromUtf8("Catal√†");
+  case QLocale::Spanish: return QString::fromUtf8("Espa?ol");
+  case QLocale::Catalan: return QString::fromUtf8("Catal®§");
   case QLocale::Galician: return QString::fromUtf8("Galego");
   case QLocale::Portuguese: {
     if (country == "br")
-      return QString::fromUtf8("Portugu√™s brasileiro");
-    return QString::fromUtf8("Portugu√™s");
+      return QString::fromUtf8("Portugu®∫s brasileiro");
+    return QString::fromUtf8("Portugu®∫s");
   }
   case QLocale::Polish: return QString::fromUtf8("Polski");
-  case QLocale::Lithuanian: return QString::fromUtf8("Lietuvi≈≥");
-  case QLocale::Czech: return QString::fromUtf8("ƒåe≈°tina");
-  case QLocale::Slovak: return QString::fromUtf8("Slovenƒçina");
-  case QLocale::Serbian: return QString::fromUtf8("–°—Ä–ø—Å–∫–∏");
+  case QLocale::Lithuanian: return QString::fromUtf8("Lietuvi?");
+  case QLocale::Czech: return QString::fromUtf8("?e?tina");
+  case QLocale::Slovak: return QString::fromUtf8("Sloven?ina");
+  case QLocale::Serbian: return QString::fromUtf8("ß≥ß‚ß·ß„ß‹ß⁄");
   case QLocale::Croatian: return QString::fromUtf8("Hrvatski");
-  case QLocale::Armenian: return QString::fromUtf8("’Ä’°’µ’•÷Ä’•’∂");
-  case QLocale::Romanian: return QString::fromUtf8("Rom√¢nƒÉ");
-  case QLocale::Turkish: return QString::fromUtf8("T√ºrk√ße");
-  case QLocale::Greek: return QString::fromUtf8("ŒïŒªŒªŒ∑ŒΩŒπŒ∫Œ¨");
+  case QLocale::Armenian: return QString::fromUtf8("???????");
+  case QLocale::Romanian: return QString::fromUtf8("Roman?");
+  case QLocale::Turkish: return QString::fromUtf8("T®πrk?e");
+  case QLocale::Greek: return QString::fromUtf8("¶•¶À¶À¶«¶Õ¶…¶ ?");
   case QLocale::Swedish: return QString::fromUtf8("Svenska");
   case QLocale::Finnish: return QString::fromUtf8("Suomi");
   case QLocale::Norwegian: return QString::fromUtf8("Norsk");
   case QLocale::Danish: return QString::fromUtf8("Dansk");
-  case QLocale::Bulgarian: return QString::fromUtf8("–ë—ä–ª–≥–∞—Ä—Å–∫–∏");
-  case QLocale::Ukrainian: return QString::fromUtf8("–£–∫—Ä–∞—ó–Ω—Å—å–∫–∞");
-  case QLocale::Russian: return QString::fromUtf8("–†—É—Å—Å–∫–∏–π");
-  case QLocale::Japanese: return QString::fromUtf8("Êó•Êú¨Ë™û");
-  case QLocale::Arabic: return QString::fromUtf8("ÿπÿ±ÿ®Ÿä");
-  case QLocale::Georgian: return QString::fromUtf8("·É•·Éê·É†·Éó·É£·Éö·Éò");
-  case QLocale::Byelorussian: return QString::fromUtf8("–ë–µ–ª–∞—Ä—É—Å–∫–∞—è");
+  case QLocale::Bulgarian: return QString::fromUtf8("ß¢ßÏß›ß‘ß—ß‚ß„ß‹ß⁄");
+  case QLocale::Ukrainian: return QString::fromUtf8("ßµß‹ß‚ß—?ßﬂß„ßÓß‹ß—");
+  case QLocale::Russian: return QString::fromUtf8("ß≤ßÂß„ß„ß‹ß⁄ß€");
+  case QLocale::Japanese: return QString::fromUtf8("»’±æ’Z");
+  case QLocale::Arabic: return QString::fromUtf8("????");
+  case QLocale::Georgian: return QString::fromUtf8("???????");
+  case QLocale::Byelorussian: return QString::fromUtf8("ß¢ß÷ß›ß—ß‚ßÂß„ß‹ß—ßÒ");
   case QLocale::Basque: return QString::fromUtf8("Euskara");
   case QLocale::Chinese: {
     if (country == "cn")
-      return QString::fromUtf8("‰∏≠Êñá (ÁÆÄ‰Ωì)");
-    return QString::fromUtf8("‰∏≠Êñá (ÁπÅÈ´î)");
+      return QString::fromUtf8("÷–Œƒ (ºÚÃÂ)");
+    return QString::fromUtf8("÷–Œƒ (∑±Ûw)");
   }
-  case QLocale::Korean: return QString::fromUtf8("ÌïúÍ∏Ä");
+  case QLocale::Korean: return QString::fromUtf8("??");
   default: {
     // Fallback to English
     const QString eng_lang = QLocale::languageToString(language);
