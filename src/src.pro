@@ -4,7 +4,7 @@ CONFIG += qt thread
 
 # Windows specific configuration
 win32 {
-  include(../winconf.pri)  
+  include(../winconf.pri)
 }
 
 # Mac specific configuration

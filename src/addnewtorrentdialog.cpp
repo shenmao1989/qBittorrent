@@ -135,7 +135,7 @@ void AddNewTorrentDialog::showMagnet(const QString& link)
 void AddNewTorrentDialog::showAdvancedSettings(bool show)
 {
   if (show) {
-    ui->adv_button->setText(QString::fromUtf8("¡ø"));
+    ui->adv_button->setText(QString::fromUtf8("\u25b2"));
     ui->settings_group->setVisible(true);
     ui->info_group->setVisible(!m_isMagnet);
     if (!m_isMagnet && (m_torrentInfo->num_files() > 1)) {
@@ -147,7 +147,7 @@ void AddNewTorrentDialog::showAdvancedSettings(bool show)
     }
     static_cast<QVBoxLayout*>(layout())->insertWidget(layout()->indexOf(ui->never_show_cb)+1, ui->adv_button);
   } else {
-    ui->adv_button->setText(QString::fromUtf8("¨‹"));
+    ui->adv_button->setText(QString::fromUtf8("\u25bc"));
     ui->settings_group->setVisible(false);
     ui->info_group->setVisible(false);
     ui->buttonsHLayout->insertWidget(0, layout()->takeAt(layout()->indexOf(ui->never_show_cb)+1)->widget());

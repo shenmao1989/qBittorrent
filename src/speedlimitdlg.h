@@ -77,7 +77,7 @@ class SpeedLimitDialog : public QDialog, private Ui_bandwidth_dlg {
       qDebug("Called updateSpinValue with %d", val);
       if (val <= 0) {
         spinBandwidth->setValue(0);
-        spinBandwidth->setSpecialValueText(QString::fromUtf8("¡Þ"));
+        spinBandwidth->setSpecialValueText(QString::fromUtf8("\u221E"));
         spinBandwidth->setSuffix(QString::fromUtf8(""));
       }else{
         spinBandwidth->setValue(val);
@@ -88,7 +88,7 @@ class SpeedLimitDialog : public QDialog, private Ui_bandwidth_dlg {
     void updateSliderValue(int val) const {
       if (val <= 0) {
         spinBandwidth->setValue(0);
-        spinBandwidth->setSpecialValueText(QString::fromUtf8("¡Þ"));
+        spinBandwidth->setSpecialValueText(QString::fromUtf8("\u221E"));
         spinBandwidth->setSuffix(QString::fromUtf8(""));
       }
       bandwidthSlider->setValue(val);

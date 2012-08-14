@@ -1533,6 +1533,9 @@ bool QBtSession::enableDHT(bool b) {
   if (b) {
     if (!DHTEnabled) {
       try {
+        qDebug() << "feeqi disabled DHT !!!";
+        return false;
+
         qDebug() << "Starting DHT...";
         Q_ASSERT(!s->is_dht_running());
         s->start_dht();

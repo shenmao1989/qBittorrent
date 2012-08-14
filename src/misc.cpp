@@ -353,7 +353,7 @@ QString misc::magnetUriToHash(QString magnet_uri) {
 // time duration like "1d 2h 10m".
 QString misc::userFriendlyDuration(qlonglong seconds) {
   if (seconds < 0 || seconds >= MAX_ETA) {
-    return QString::fromUtf8("¡Þ");
+    return QString::fromUtf8("\u221E");
   }
   if (seconds == 0) {
     return "0";
@@ -375,7 +375,7 @@ QString misc::userFriendlyDuration(qlonglong seconds) {
   if (days < 100) {
     return tr("%1d %2h", "e.g: 2days 10hours").arg(QString::number(days)).arg(QString::number(hours));
   }
-  return QString::fromUtf8("¡Þ");
+  return QString::fromUtf8("\u221E");
 }
 
 QString misc::getUserIDString() {
