@@ -1018,6 +1018,13 @@ public:
     return value(QString::fromUtf8("Preferences/Connection/InetAddress"), QString()).toString();
   }
 
+  bool getAutoAddress() const {
+    return value(QString::fromUtf8("Preferences/Connection/AutoAddress"), true).toBool();
+  }
+
+  void setAutoAddress(bool resolve) {
+    setValue(QString::fromUtf8("Preferences/Connection/AutoAddress"), resolve);
+  }
 #if LIBTORRENT_VERSION_MINOR > 15
   bool isAnonymousModeEnabled() const {
     return value(QString::fromUtf8("Preferences/Advanced/AnonymousMode"), false).toBool();

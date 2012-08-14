@@ -13,7 +13,7 @@
 #include "preferences.h"
 
 enum AdvSettingsCols {PROPERTY, VALUE};
-enum AdvSettingsRows {DISK_CACHE, OUTGOING_PORT_MIN, OUTGOING_PORT_MAX, IGNORE_LIMIT_LAN, RECHECK_COMPLETED, LIST_REFRESH, RESOLVE_COUNTRIES, RESOLVE_HOSTS, MAX_HALF_OPEN, SUPER_SEEDING, NETWORK_IFACE, NETWORK_ADDRESS, PROGRAM_NOTIFICATIONS, TRACKER_STATUS, TRACKER_PORT,
+enum AdvSettingsRows {DISK_CACHE, OUTGOING_PORT_MIN, OUTGOING_PORT_MAX, IGNORE_LIMIT_LAN, RECHECK_COMPLETED, LIST_REFRESH, RESOLVE_COUNTRIES, RESOLVE_HOSTS, MAX_HALF_OPEN, SUPER_SEEDING, NETWORK_IFACE, NETWORK_ADDRESS, AUTO_ADDRESS, PROGRAM_NOTIFICATIONS, TRACKER_STATUS, TRACKER_PORT,
                     #if defined(Q_WS_WIN) || defined(Q_WS_MAC)
                       UPDATE_CHECK,
                     #endif
@@ -31,7 +31,7 @@ private:
   QSpinBox spin_cache, outgoing_ports_min, outgoing_ports_max, spin_list_refresh, spin_maxhalfopen, spin_tracker_port;
   QCheckBox cb_ignore_limits_lan, cb_recheck_completed, cb_resolve_countries, cb_resolve_hosts,
   cb_super_seeding, cb_program_notifications, cb_tracker_status, cb_confirm_torrent_deletion,
-  cb_enable_tracker_ext;
+  cb_enable_tracker_ext, cb_enable_auto_address;
   QComboBox combo_iface;
 #if defined(Q_WS_WIN) || defined(Q_WS_MAC)
   QCheckBox cb_update_check;
@@ -96,6 +96,8 @@ public slots:
       pref.setNetworkAddress("");
     else
       pref.setNetworkAddress(addr.toString());
+    //auto get address
+    pref.setAutoAddress(cb_enable_auto_address.isChecked());
     // Program notification
     pref.useProgramNotification(cb_program_notifications.isChecked());
     // Tracker
@@ -210,6 +212,9 @@ private slots:
     // Network address
     txt_network_address.setText(pref.getNetworkAddress());
     setRow(NETWORK_ADDRESS, tr("IP Address to report to trackers (requires restart)"), &txt_network_address);
+    // auo get address
+    cb_enable_auto_address.setChecked(pref.getAutoAddress());
+    setRow(AUTO_ADDRESS, tr("Auto set what address for trackers"), &cb_enable_auto_address);
     // Program notifications
     cb_program_notifications.setChecked(pref.useProgramNotification());
     setRow(PROGRAM_NOTIFICATIONS, tr("Display program on-screen notifications"), &cb_program_notifications);
