@@ -1,20 +1,20 @@
 # Adapt these paths on Windows
 
 #Point this to the boost include folder
-INCLUDEPATH += $$quote(C:/qBittorrent/boost_1_46_0)
+INCLUDEPATH += $$quote(C:/Qt/boost_1_46_1)
 #Point this to the libtorrent include folser
-INCLUDEPATH += $$quote(C:/qBittorrent/RC_0_15/include)
+INCLUDEPATH += $$quote(C:/Qt/libtorrent-rasterbar-0.15.10/include)
 #Point this to the zlib include folder(libtorrent's if you used that)
-INCLUDEPATH += $$quote(C:/qBittorrent/RC_0_15/zlib)
+INCLUDEPATH += $$quote(C:/Qt/libtorrent-rasterbar-0.15.10/zlib)
 #Point this to the openssl include folder
-INCLUDEPATH += $$quote(C:/OpenSSL/include)
+INCLUDEPATH += $$quote(C:/Qt/OpenSSL-Win32/include)
 
 #Point this to the openssl lib folder
-LIBS += $$quote(-LC:/OpenSSL/lib/VC)
+LIBS += $$quote(-LC:/Qt/OpenSSL-Win32/lib/VC)
 #Point this to the libtorrent lib folder
-LIBS += $$quote(-LC:/qBittorrent/RC_0_15/bin/<path-according-to-the-build-options-chosen>)
+LIBS += $$quote(-LC:/Qt/libtorrent-rasterbar-0.15.10/lib)
 #Point this to the boost lib folder
-LIBS += $$quote(-LC:/qBittorrent/boost_1_46_0/stage/lib)
+LIBS += $$quote(-LC:/Qt/boost_1_46_1/stage/lib)
 
 # LIBTORRENT DEFINES
 DEFINES += BOOST_ALL_NO_LIB
