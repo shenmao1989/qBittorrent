@@ -280,7 +280,7 @@ void QBtSession::setQueueingEnabled(bool enable) {
 // Set BT session configuration
 void QBtSession::configureSession() {
   qDebug("Configuring session");
-  const Preferences pref;
+  Preferences pref;
   // * Ports binding
   const unsigned short old_listenPort = getListenPort();
   const unsigned short new_listenPort = pref.getSessionPort();
@@ -444,6 +444,26 @@ void QBtSession::configureSession() {
       sessionSettings.announce_ip = addr;
     }
 #endif
+  }
+  //feeqi 如果指定获取本地局域网ip，然么强制设定为当前活动网卡的ip todo
+  bool autoAddress = pref.getAutoAddress();
+  QRegExp ipv4_check("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+  if(autoAddress){
+      foreach (const QNetworkInterface& iface, QNetworkInterface::allInterfaces()) {
+        if (iface.flags() & QNetworkInterface::IsLoopBack) continue;
+        if (!(iface.flags() & QNetworkInterface::IsUp)) continue;
+        //获取连接地址列表
+        QList<QNetworkAddressEntry> addressEntriesList = iface.addressEntries();
+        for (QList<QNetworkAddressEntry>::const_iterator j = addressEntriesList.constBegin(); j != addressEntriesList.constEnd(); ++j) {
+            if(ipv4_check.exactMatch((*j).ip().toString())){
+                announce_ip = (*j).ip().toString();
+                pref.setNetworkInterface(iface.name());
+                pref.setNetworkAddress(announce_ip);
+                //输出 ip
+                qDebug() << "autoAddress got ip is:" << (*j).ip().toString();
+            }
+        }
+      }
   }
   // Super seeding
   sessionSettings.strict_super_seeding = pref.isSuperSeedingEnabled();
@@ -1534,7 +1554,7 @@ bool QBtSession::enableDHT(bool b) {
     if (!DHTEnabled) {
       try {
         qDebug() << "feeqi disabled DHT !!!";
-        //return false;
+        return false;
 
         qDebug() << "Starting DHT...";
         Q_ASSERT(!s->is_dht_running());

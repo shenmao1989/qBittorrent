@@ -212,7 +212,7 @@ private slots:
     // Network address
     txt_network_address.setText(pref.getNetworkAddress());
     setRow(NETWORK_ADDRESS, tr("IP Address to report to trackers (requires restart)"), &txt_network_address);
-    // auo get address
+    // feeqi auo get address
     cb_enable_auto_address.setChecked(pref.getAutoAddress());
     setRow(AUTO_ADDRESS, tr("Auto set what address for trackers"), &cb_enable_auto_address);
     // Program notifications
