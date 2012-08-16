@@ -100,7 +100,7 @@ MainWindow::MainWindow(QWidget *parent, const QStringList& torrentCmdLine) : QMa
 
   Preferences pref;
   ui_locked = pref.isUILocked();
-  setWindowTitle(tr("qBittorrent %1", "e.g: qBittorrent v0.x").arg(QString::fromUtf8(VERSION)));
+  setWindowTitle(tr("%1 %2", "e.g: qBittorrent v0.x").arg(QString::fromUtf8(PROJECT_NAME)).arg(QString::fromUtf8(VERSION)));
   displaySpeedInTitle = pref.speedInTitleBar();
   // Clean exit on log out
   connect(static_cast<SessionApplication*>(qApp), SIGNAL(sessionIsShuttingDown()), this, SLOT(deleteBTSession()));
@@ -108,7 +108,6 @@ MainWindow::MainWindow(QWidget *parent, const QStringList& torrentCmdLine) : QMa
   this->setWindowIcon(QIcon(QString::fromUtf8(":/Icons/skin/logo_32x32.png")));
   actionOpen->setIcon(IconProvider::instance()->getIcon("list-add"));
   actionDownload_from_URL->setIcon(IconProvider::instance()->getIcon("insert-link"));
-  actionSet_upload_limit->setIcon(QIcon(QString::fromUtf8(":/Icons/skin/seeding.png")));
   actionSet_download_limit->setIcon(QIcon(QString::fromUtf8(":/Icons/skin/download.png")));
   actionSet_global_upload_limit->setIcon(QIcon(QString::fromUtf8(":/Icons/skin/seeding.png")));
   actionSet_global_download_limit->setIcon(QIcon(QString::fromUtf8(":/Icons/skin/download.png")));
@@ -118,6 +117,7 @@ MainWindow::MainWindow(QWidget *parent, const QStringList& torrentCmdLine) : QMa
   actionDecreasePriority->setIcon(IconProvider::instance()->getIcon("go-down"));
   actionDelete->setIcon(IconProvider::instance()->getIcon("list-remove"));
   actionDocumentation->setIcon(IconProvider::instance()->getIcon("help-contents"));
+  actionWebsite->setIcon(QIcon(QString::fromUtf8(":/Icons/skin/logo_32x32.png")));
   actionDonate_money->setIcon(IconProvider::instance()->getIcon("wallet-open"));
   actionExit->setIcon(IconProvider::instance()->getIcon("application-exit"));
   actionIncreasePriority->setIcon(IconProvider::instance()->getIcon("go-up"));
@@ -1121,7 +1121,7 @@ void MainWindow::updateGUI() {
     systrayIcon->setToolTip(html); // tray icon
   }
   if (displaySpeedInTitle) {
-    setWindowTitle(tr("[D: %1/s, U: %2/s] PROJECT_NAME %3", "D = Download; U = Upload; %3 is PROJECT_NAME version").arg(misc::friendlyUnit(QBtSession::instance()->getSessionStatus().payload_download_rate)).arg(misc::friendlyUnit(QBtSession::instance()->getSessionStatus().payload_upload_rate)).arg(QString::fromUtf8(VERSION)));
+    setWindowTitle(tr("[D: %1/s, U: %2/s] %4 %3", "D = Download; U = Upload; %3 is qbittorrent version").arg(misc::friendlyUnit(QBtSession::instance()->getSessionStatus().payload_download_rate)).arg(misc::friendlyUnit(QBtSession::instance()->getSessionStatus().payload_upload_rate)).arg(QString::fromUtf8(VERSION)).arg(QString::fromUtf8(PROJECT_NAME)));
   }
 }
 
@@ -1268,7 +1268,7 @@ void MainWindow::on_actionSpeed_in_title_bar_triggered() {
   if (displaySpeedInTitle)
     updateGUI();
   else
-    setWindowTitle(tr("PROJECT_NAME %1", "e.g: qBittorrent v0.x").arg(QString::fromUtf8(VERSION)));
+    setWindowTitle(tr("%1 %2", "e.g: qBittorrent v0.x").arg(QString::fromUtf8(PROJECT_NAME)).arg(QString::fromUtf8(VERSION)));
 }
 
 void MainWindow::on_actionRSS_Reader_triggered() {

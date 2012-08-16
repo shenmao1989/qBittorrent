@@ -1,10 +1,12 @@
-PROJECT_NAME = qbittorrent(思可觅专版)
+PROJECT_NAME = qbittorrent(sikemi)
 PROJECT_VERSION = 1.0.0
 
 os2 {
     DEFINES += VERSION=\'\"v$${PROJECT_VERSION}\"\'
+    DEFINES += PROJECT_NAME=\'\"$${PROJECT_NAME}\"\'
 } else {
     DEFINES += VERSION=\\\"v$${PROJECT_VERSION}\\\"
+    DEFINES += PROJECT_NAME=\\\"$${PROJECT_NAME}\\\"
 }
 
 DEFINES += VERSION_MAJOR=1

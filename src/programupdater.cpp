@@ -128,7 +128,7 @@ void ProgramUpdater::rssDownloadFinished(QNetworkReply *reply)
               qDebug("Detected version is %s", qPrintable(new_version));
               if (isVersionMoreRecent(new_version)){
                   // feeqi close update check todo
-                  setUpdateUrl(item_title);
+                  //setUpdateUrl(item_title);
               }
             }
             break;
