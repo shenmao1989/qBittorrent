@@ -261,10 +261,11 @@ int main(int argc, char *argv[]) {
   if (!no_splash) {
     QPixmap splash_img(":/Icons/skin/splash.png");
     QPainter painter(&splash_img);
-    QString version = VERSION;
-    painter.setPen(QPen(Qt::white));
-    painter.setFont(QFont("Arial", 22, QFont::Black));
-    painter.drawText(224 - painter.fontMetrics().width(version), 270, version);
+//feeqi 去掉文字
+//    QString version = VERSION;
+//    painter.setPen(QPen(Qt::white));
+//    painter.setFont(QFont("Arial", 22, QFont::Black));
+//    painter.drawText(224 - painter.fontMetrics().width(version), 270, version);
     splash = new QSplashScreen(splash_img, Qt::WindowStaysOnTopHint);
     QTimer::singleShot(1500, splash, SLOT(deleteLater()));
     splash->show();
