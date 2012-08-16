@@ -105,7 +105,7 @@ MainWindow::MainWindow(QWidget *parent, const QStringList& torrentCmdLine) : QMa
   // Clean exit on log out
   connect(static_cast<SessionApplication*>(qApp), SIGNAL(sessionIsShuttingDown()), this, SLOT(deleteBTSession()));
   // Setting icons
-  this->setWindowIcon(QIcon(QString::fromUtf8(":/Icons/skin/qbittorrent32.png")));
+  this->setWindowIcon(QIcon(QString::fromUtf8(":/Icons/skin/logo_32x32.png")));
   actionOpen->setIcon(IconProvider::instance()->getIcon("list-add"));
   actionDownload_from_URL->setIcon(IconProvider::instance()->getIcon("insert-link"));
   actionSet_upload_limit->setIcon(QIcon(QString::fromUtf8(":/Icons/skin/seeding.png")));
@@ -1399,8 +1399,10 @@ QIcon MainWindow::getSystrayIcon() const
   }
 #endif
   QIcon icon;
-  icon.addFile(":/Icons/skin/qbittorrent22.png", QSize(22, 22));
-  icon.addFile(":/Icons/skin/qbittorrent16.png", QSize(16, 16));
-  icon.addFile(":/Icons/skin/qbittorrent32.png", QSize(32, 32));
+  icon.addFile(":/Icons/skin/logo_16x16.png", QSize(16, 16));
+  icon.addFile(":/Icons/skin/logo_22x22.png", QSize(22, 22));
+  icon.addFile(":/Icons/skin/logo_32x32.png", QSize(32, 32));
+  icon.addFile(":/Icons/skin/logo_64x64.png", QSize(64, 64));
+  icon.addFile(":/Icons/skin/logo_128x128.png", QSize(128, 128));
   return icon;
 }

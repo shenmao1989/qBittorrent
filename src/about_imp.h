@@ -49,7 +49,7 @@ class about : public QDialog, private Ui::AboutDlg{
       setupUi(this);
       setAttribute(Qt::WA_DeleteOnClose);
       // Set icons
-      logo->setPixmap(QPixmap(QString::fromUtf8(":/Icons/skin/qbittorrent22.png")));
+      logo->setPixmap(QPixmap(QString::fromUtf8(":/Icons/skin/logo_22x22.png")));
       //Title
       lb_name->setText(QString::fromUtf8("<b><h1>")+tr("qBittorrent")+QString::fromUtf8(" "VERSION"</h1></b>"));
       // Thanks

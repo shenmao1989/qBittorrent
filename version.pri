@@ -1,4 +1,4 @@
-PROJECT_NAME = qbittorrent
+PROJECT_NAME = qbittorrent(思可觅专版)
 PROJECT_VERSION = 3.1.0alpha
 
 os2 {

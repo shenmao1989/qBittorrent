@@ -1,3 +1,4 @@
+debug/*
 src/geoip/GeoIP.dat
 src/qbittorrent
 qbittorrent.pro.user

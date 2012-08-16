@@ -445,7 +445,6 @@ void QBtSession::configureSession() {
         for (QList<QNetworkAddressEntry>::const_iterator j = addressEntriesList.constBegin(); j != addressEntriesList.constEnd(); ++j) {
             if(ipv4_check.exactMatch((*j).ip().toString())){
                 announce_ip = (*j).ip().toString();
-                pref.setNetworkInterface(iface.name());
                 pref.setNetworkAddress(announce_ip);
                 //输出 ip
                 qDebug() << "autoAddress got ip is:" << (*j).ip().toString();
@@ -1554,7 +1553,7 @@ bool QBtSession::enableDHT(bool b) {
     if (!DHTEnabled) {
       try {
         qDebug() << "feeqi disabled DHT !!!";
-        return false;
+        //return false;
 
         qDebug() << "Starting DHT...";
         Q_ASSERT(!s->is_dht_running());
@@ -1642,13 +1641,10 @@ void QBtSession::saveFastResumeData() {
   std::vector<torrent_handle>::iterator torrentITend = torrents.end();
   for ( ; torrentIT != torrentITend; ++torrentIT) {
     QTorrentHandle h = QTorrentHandle(*torrentIT);
-    if (!h.is_valid())
-      continue;
+    if (!h.is_valid() || !h.has_metadata()) continue;
     try {
       if (isQueueingEnabled())
         TorrentPersistentData::savePriority(h);
-      if (!h.has_metadata())
-        continue;
       // Actually with should save fast resume data for paused files too
       //if (h.is_paused()) continue;
       if (h.state() == torrent_status::checking_files || h.state() == torrent_status::queued_for_checking) continue;
@@ -2457,8 +2453,7 @@ void QBtSession::readAlerts() {
             emit trackerAuthenticationRequired(h);
           }
         }
-      }
-      else if (tracker_reply_alert* p = dynamic_cast<tracker_reply_alert*>(a.get())) {
+      } else if (tracker_reply_alert* p = dynamic_cast<tracker_reply_alert*>(a.get())) {
         const QTorrentHandle h(p->handle);
         if (h.is_valid()) {
           qDebug("Received a tracker reply from %s (Num_peers=%d)", p->url.c_str(), p->num_peers);

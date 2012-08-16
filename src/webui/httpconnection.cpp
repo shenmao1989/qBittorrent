@@ -218,7 +218,7 @@ void HttpConnection::respond() {
   // Favicon
   if (url.endsWith("favicon.ico")) {
     qDebug("Returning favicon");
-    QFile favicon(":/Icons/skin/qbittorrent16.png");
+    QFile favicon(":/Icons/skin/logo_16x16.png");
     if (favicon.open(QIODevice::ReadOnly)) {
       const QByteArray data = favicon.readAll();
       favicon.close();
