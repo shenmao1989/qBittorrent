@@ -458,7 +458,7 @@ void MainWindow::updateNbTorrents() {
 }
 
 void MainWindow::on_actionWebsite_triggered() const {
-  QDesktopServices::openUrl(QUrl(QString::fromUtf8("http://www.qbittorrent.org")));
+  QDesktopServices::openUrl(QUrl(QString::fromUtf8("http://bt.sicau.org")));
 }
 
 void MainWindow::on_actionDocumentation_triggered() const {
@@ -466,7 +466,7 @@ void MainWindow::on_actionDocumentation_triggered() const {
 }
 
 void MainWindow::on_actionBugReport_triggered() const {
-  QDesktopServices::openUrl(QUrl(QString::fromUtf8("http://bugs.qbittorrent.org")));
+  QDesktopServices::openUrl(QUrl(QString::fromUtf8("http://www.feeqi.com/")));
 }
 
 void MainWindow::tab_changed(int new_tab) {
@@ -1104,7 +1104,7 @@ void MainWindow::updateGUI() {
   if (systrayIcon) {
 #if defined(Q_WS_X11) || defined(Q_WS_MAC)
     QString html = "<div style='background-color: #678db2; color: #fff;height: 18px; font-weight: bold; margin-bottom: 5px;'>";
-    html += tr("qBittorrent");
+    html += tr("PROJECT_NAME");
     html += "</div>";
     html += "<div style='vertical-align: baseline; height: 18px;'>";
     html += "<img src=':/Icons/skin/download.png'/>&nbsp;"+tr("DL speed: %1 KiB/s", "e.g: Download speed: 10 KiB/s").arg(QString::number(QBtSession::instance()->getPayloadDownloadRate()/1024., 'f', 1));
@@ -1121,7 +1121,7 @@ void MainWindow::updateGUI() {
     systrayIcon->setToolTip(html); // tray icon
   }
   if (displaySpeedInTitle) {
-    setWindowTitle(tr("[D: %1/s, U: %2/s] qBittorrent %3", "D = Download; U = Upload; %3 is qBittorrent version").arg(misc::friendlyUnit(QBtSession::instance()->getSessionStatus().payload_download_rate)).arg(misc::friendlyUnit(QBtSession::instance()->getSessionStatus().payload_upload_rate)).arg(QString::fromUtf8(VERSION)));
+    setWindowTitle(tr("[D: %1/s, U: %2/s] PROJECT_NAME %3", "D = Download; U = Upload; %3 is PROJECT_NAME version").arg(misc::friendlyUnit(QBtSession::instance()->getSessionStatus().payload_download_rate)).arg(misc::friendlyUnit(QBtSession::instance()->getSessionStatus().payload_upload_rate)).arg(QString::fromUtf8(VERSION)));
   }
 }
 
@@ -1268,7 +1268,7 @@ void MainWindow::on_actionSpeed_in_title_bar_triggered() {
   if (displaySpeedInTitle)
     updateGUI();
   else
-    setWindowTitle(tr("qBittorrent %1", "e.g: qBittorrent v0.x").arg(QString::fromUtf8(VERSION)));
+    setWindowTitle(tr("PROJECT_NAME %1", "e.g: qBittorrent v0.x").arg(QString::fromUtf8(VERSION)));
 }
 
 void MainWindow::on_actionRSS_Reader_triggered() {

@@ -173,8 +173,8 @@
   </action>
   <action name="actionWebsite">
    <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/Icons/skin/logo_32x32.png</normaloff>:/Icons/skin/logo_32x32.png</iconset>
+    <iconset>
+     <normaloff>:/Icons/skin/qbittorrent32.png</normaloff>:/Icons/skin/qbittorrent32.png</iconset>
    </property>
    <property name="text">
     <string>Visit &amp;Website</string>
@@ -208,6 +208,9 @@
   <action name="actionDocumentation">
    <property name="text">
     <string>&amp;Documentation</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
   <action name="actionSet_global_download_limit">
@@ -311,6 +314,9 @@
    <property name="toolTip">
     <string>If you like qBittorrent, please donate!</string>
    </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
   </action>
   <action name="actionStart_All">
    <property name="text">
@@ -376,8 +382,6 @@
    </property>
   </action>
  </widget>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
