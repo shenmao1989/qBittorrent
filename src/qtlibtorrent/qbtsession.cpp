@@ -433,18 +433,6 @@ void QBtSession::configureSession() {
   sessionSettings.rate_limit_ip_overhead = pref.includeOverheadInLimits();
   // IP address to announce to trackers
   QString announce_ip = pref.getNetworkAddress();
-  if (!announce_ip.isEmpty()) {
-#if LIBTORRENT_VERSION_MINOR > 15
-    sessionSettings.announce_ip = announce_ip.toStdString();
-#else
-    boost::system::error_code ec;
-    boost::asio::ip::address addr = boost::asio::ip::address::from_string(announce_ip.toStdString(), ec);
-    if (!ec) {
-      addConsoleMessage(tr("Reporting IP address %1 to trackers...").arg(announce_ip));
-      sessionSettings.announce_ip = addr;
-    }
-#endif
-  }
   //feeqi 如果指定获取本地局域网ip，然么强制设定为当前活动网卡的ip todo
   bool autoAddress = pref.getAutoAddress();
   QRegExp ipv4_check("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
@@ -464,6 +452,18 @@ void QBtSession::configureSession() {
             }
         }
       }
+  }
+  if (!announce_ip.isEmpty()) {
+#if LIBTORRENT_VERSION_MINOR > 15
+    sessionSettings.announce_ip = announce_ip.toStdString();
+#else
+    boost::system::error_code ec;
+    boost::asio::ip::address addr = boost::asio::ip::address::from_string(announce_ip.toStdString(), ec);
+    if (!ec) {
+      addConsoleMessage(tr("Reporting IP address %1 to trackers...").arg(announce_ip));
+      sessionSettings.announce_ip = addr;
+    }
+#endif
   }
   // Super seeding
   sessionSettings.strict_super_seeding = pref.isSuperSeedingEnabled();
