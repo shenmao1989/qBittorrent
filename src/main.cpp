@@ -43,6 +43,7 @@
 #include <QFont>
 #include <QPushButton>
 #include <QTimer>
+#include <QTextCodec>
 #include "sessionapplication.h"
 #include "mainwindow.h"
 #include "ico.h"
@@ -162,6 +163,12 @@ int main(int argc, char *argv[]) {
 #else
   SessionApplication app("qBittorrent-"+uid, argc, argv);
 #endif
+
+  // feeqi 解决中文乱码
+  QTextCodec *codec = QTextCodec::codecForName("System");    //获取系统编码
+  QTextCodec::setCodecForLocale(codec);
+  QTextCodec::setCodecForCStrings(codec);
+  QTextCodec::setCodecForTr(codec);
 
   // Check if qBittorrent is already running for this user
   if (app.isRunning()) {

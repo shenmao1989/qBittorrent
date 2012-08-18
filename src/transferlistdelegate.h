@@ -135,7 +135,7 @@ public:
       if (limit > 0)
         QItemDelegate::drawDisplay(painter, opt, opt.rect, QString::number(limit/1024., 'f', 1) + " " + tr("KiB/s", "KiB/second (.i.e per second)"));
       else
-        QItemDelegate::drawDisplay(painter, opt, opt.rect, QString::fromUtf8("\u221e"));
+        QItemDelegate::drawDisplay(painter, opt, opt.rect, tr("¡Þ"));
       break;
     }
     case TorrentModelItem::TR_TIME_ELAPSED: {
@@ -157,7 +157,7 @@ public:
         opt.displayAlignment = Qt::AlignRight;
         const qreal ratio = index.data().toDouble();
         if (ratio > QBtSession::MAX_RATIO)
-          QItemDelegate::drawDisplay(painter, opt, opt.rect, QString::fromUtf8("\u221e"));
+          QItemDelegate::drawDisplay(painter, opt, opt.rect, tr("¡Þ"));
         else
           QItemDelegate::drawDisplay(painter, opt, opt.rect, QString::number(ratio, 'f', 2));
         break;

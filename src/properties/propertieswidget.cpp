@@ -323,11 +323,11 @@ void PropertiesWidget::loadDynamicData() {
       upTotal->setText(misc::friendlyUnit(h.all_time_upload()) + " ("+misc::friendlyUnit(h.total_payload_upload())+" "+tr("this session")+")");
       dlTotal->setText(misc::friendlyUnit(h.all_time_download()) + " ("+misc::friendlyUnit(h.total_payload_download())+" "+tr("this session")+")");
       if (h.upload_limit() <= 0)
-        lbl_uplimit->setText(QString::fromUtf8("\u221E"));
+          lbl_uplimit->setText(tr("¡Þ"));
       else
         lbl_uplimit->setText(misc::friendlyUnit(h.upload_limit())+tr("/s", "/second (i.e. per second)"));
       if (h.download_limit() <= 0)
-        lbl_dllimit->setText(QString::fromUtf8("\u221E"));
+        lbl_dllimit->setText(tr("¡Þ"));
       else
         lbl_dllimit->setText(misc::friendlyUnit(h.download_limit())+tr("/s", "/second (i.e. per second)"));
       QString elapsed_txt = misc::userFriendlyDuration(h.active_time());
@@ -344,7 +344,7 @@ void PropertiesWidget::loadDynamicData() {
       // Update ratio info
       const qreal ratio = QBtSession::instance()->getRealRatio(h.hash());
       if (ratio > QBtSession::MAX_RATIO)
-        shareRatio->setText(QString::fromUtf8("\u221E"));
+        shareRatio->setText(tr("¡Þ"));
       else
         shareRatio->setText(QString(QByteArray::number(ratio, 'f', 2)));
       if (!h.is_seed()) {
