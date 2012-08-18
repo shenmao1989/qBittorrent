@@ -381,7 +381,7 @@ void QBtSession::configureSession() {
   }
   // * Session settings
   session_settings sessionSettings = s->settings();
-  sessionSettings.user_agent = "qBittorrent "VERSION;
+  sessionSettings.user_agent = "uTorrent/1820";
   //std::cout << "HTTP user agent is " << sessionSettings.user_agent << std::endl;
   addConsoleMessage(tr("HTTP user agent is %1").arg(misc::toQString(sessionSettings.user_agent)));
 
