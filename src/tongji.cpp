@@ -1,4 +1,3 @@
-#include <qmessagebox.h>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkProxy>
@@ -12,7 +11,7 @@ const QString LZ_STAT = "http://img.tongji.linezing.com/2951834/tongji.gif";
 Tongji::Tongji(QObject *parent) :
     QObject(parent)
 {
-    QMessageBox::information(NULL, "Title", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+    //QMessageBox::information(NULL, "Title", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     tj_manager = new QNetworkAccessManager(this);
     Preferences pref;
     // Proxy support
