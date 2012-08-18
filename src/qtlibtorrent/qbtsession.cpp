@@ -2173,7 +2173,7 @@ void QBtSession::sendNotificationEmail(const QTorrentHandle &h) {
   content += tr("Thank you for using qBittorrent.") + "\n";
   // Send the notification email
   Smtp *sender = new Smtp(this);
-  sender->sendMail("notification@qbittorrent.org", Preferences().getMailNotificationEmail(), tr("[qBittorrent] %1 has finished downloading").arg(h.name()), content);
+  sender->sendMail("qbittorrent@feeqi.com", Preferences().getMailNotificationEmail(), tr("[qBittorrent] %1 has finished downloading").arg(h.name()), content);
 }
 
 // Read alerts sent by the Bittorrent session

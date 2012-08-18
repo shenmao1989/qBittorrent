@@ -103,7 +103,8 @@ HEADERS += misc.h \
            scannedfoldersmodel.h \
            qinisettings.h \
            smtp.h \
-           dnsupdater.h
+           dnsupdater.h \
+    tongji.h
 
 
 SOURCES += main.cpp \
@@ -112,7 +113,8 @@ SOURCES += main.cpp \
            misc.cpp \
            fs_utils.cpp \
            smtp.cpp \
-           dnsupdater.cpp
+           dnsupdater.cpp \
+    tongji.cpp
 
 nox {
   HEADERS += headlessloader.h
