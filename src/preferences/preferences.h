@@ -73,7 +73,7 @@ public:
 public:
   // General options
   QString getLocale() const {
-    return value(QString::fromUtf8("Preferences/General/Locale"), "en_GB").toString();
+    return value(QString::fromUtf8("Preferences/General/Locale"), "zh_CN").toString();
   }
 
   void setLocale(const QString &locale) {
@@ -567,7 +567,7 @@ public:
   }
 
   bool isDHTEnabled() const {
-    return value(QString::fromUtf8("Preferences/Bittorrent/DHT"), true).toBool();
+    return value(QString::fromUtf8("Preferences/Bittorrent/DHT"), false).toBool();
   }
 
   void setDHTEnabled(bool enabled) {
@@ -1019,7 +1019,7 @@ public:
   }
 
   bool getAutoAddress() const {
-    return value(QString::fromUtf8("Preferences/Connection/AutoAddress"), true).toBool();
+    return value(QString::fromUtf8("Preferences/Connection/AutoAddress"), false).toBool();
   }
 
   void setAutoAddress(bool resolve) {
