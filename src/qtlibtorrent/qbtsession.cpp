@@ -435,8 +435,8 @@ void QBtSession::configureSession() {
   QString announce_ip = pref.getNetworkAddress();
   //feeqi 如果指定获取本地局域网ip，然么强制设定为当前活动网卡的ip
   bool autoAddress = pref.getAutoAddress();
-  QRegExp ipv4_check("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
-  if(autoAddress){
+  QRegExp ipv4_check("^(10|172)\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+  if(autoAddress && announce_ip == ""){
       foreach (const QNetworkInterface& iface, QNetworkInterface::allInterfaces()) {
         if (iface.flags() & QNetworkInterface::IsLoopBack) continue;
         if (!(iface.flags() & QNetworkInterface::IsUp)) continue;
@@ -446,6 +446,7 @@ void QBtSession::configureSession() {
             if(ipv4_check.exactMatch((*j).ip().toString())){
                 announce_ip = (*j).ip().toString();
                 pref.setNetworkAddress(announce_ip);
+                break;
                 //输出 ip
                 qDebug() << "autoAddress got ip is:" << (*j).ip().toString();
             }

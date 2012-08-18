@@ -5,8 +5,8 @@
 #include "tongji.h"
 #include "preferences.h"
 
-//feeqi 设置量子统计地址
-const QString LZ_STAT = "http://img.tongji.linezing.com/2951834/tongji.gif";
+//feeqi 设置统计地址
+const QString LZ_STAT = "http://s.feeqi.com/ga.php";
 
 Tongji::Tongji(QObject *parent) :
     QObject(parent)
@@ -34,9 +34,14 @@ Tongji::Tongji(QObject *parent) :
         proxy.setPassword(pref.getProxyPassword());
       }
       tj_manager->setProxy(proxy);
+
     }
-    tj_manager->get(QNetworkRequest(QUrl(LZ_STAT)));
 }
 Tongji::~Tongji() {
   delete tj_manager;
+}
+
+void Tongji::sendRequest(QString path){
+    qDebug() << "tongji:" << path;
+    tj_manager->get(QNetworkRequest(QUrl(LZ_STAT + "&path=" + path)));
 }

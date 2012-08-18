@@ -307,7 +307,7 @@ MainWindow::MainWindow(QWidget *parent, const QStringList& torrentCmdLine) : QMa
 #endif
 #if defined(Q_WS_WIN) || defined(Q_WS_MAC)
   // Check for update
-  if (pref.isUpdateCheckEnabled()) {
+  if (pref.isUpdateCheckEnabled() && false) {
     ProgramUpdater *updater = new ProgramUpdater(this);
     connect(updater, SIGNAL(updateCheckFinished(bool, QString)), SLOT(handleUpdateCheckFinished(bool, QString)));
     updater->checkForUpdates();
@@ -315,6 +315,7 @@ MainWindow::MainWindow(QWidget *parent, const QStringList& torrentCmdLine) : QMa
 #endif
   // feeqi 添加统计代码
   Tongji *tongji = new Tongji(this);
+  tongji->sendRequest("path");
 
 
   // Make sure the Window is visible if we don't have a tray icon
