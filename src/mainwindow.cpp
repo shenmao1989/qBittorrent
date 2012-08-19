@@ -82,7 +82,7 @@ void qt_mac_set_dock_menu(QMenu *menu);
 #include "programupdater.h"
 #endif
 #include "powermanagement.h"
-#include "tongji.h"
+//#include "tongji.h"
 
 using namespace libtorrent;
 
@@ -314,8 +314,8 @@ MainWindow::MainWindow(QWidget *parent, const QStringList& torrentCmdLine) : QMa
   }
 #endif
   // feeqi 添加统计代码
-  Tongji *tongji = new Tongji(this);
-  tongji->sendRequest("path");
+  //Tongji *tongji = new Tongji(this);
+  //tongji->sendRequest("path");
 
 
   // Make sure the Window is visible if we don't have a tray icon

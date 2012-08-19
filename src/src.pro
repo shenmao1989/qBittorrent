@@ -31,6 +31,7 @@ nox {
   TARGET = qbittorrent
 }
 QT += network
+QT += webkit
 
 # Vars
 LANG_PATH = lang

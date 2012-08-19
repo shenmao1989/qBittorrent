@@ -149,7 +149,7 @@ public:
   }
 
   bool closeToTray() const {
-    return value(QString::fromUtf8("Preferences/General/CloseToTray"), false).toBool();
+    return value(QString::fromUtf8("Preferences/General/CloseToTray"), true).toBool();
   }
 
   void setCloseToTray(bool b) {

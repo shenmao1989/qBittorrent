@@ -43,6 +43,7 @@
 #include <QMessageBox>
 #include <QScrollBar>
 #include <QLabel>
+#include <QWebView>
 
 #include "transferlistdelegate.h"
 #include "transferlistwidget.h"
@@ -190,6 +191,7 @@ private:
   QHash<QString, int> customLabels;
   StatusFiltersWidget* statusFilters;
   LabelFiltersList* labelFilters;
+  QWebView* webView;
   QVBoxLayout* vLayout;
   TransferListWidget *transferList;
   int nb_labeled;
@@ -202,7 +204,7 @@ public:
     vLayout->setContentsMargins(0, 4, 0, 4);
     QFont font;
     font.setBold(true);
-    font.setCapitalization(QFont::SmallCaps);
+    font.setCapitalization(QFont::SmallCaps); // feeqi 字体设置会导致xp下异常 todo
     QLabel *torrentsLabel = new QLabel(tr("Torrents"));
     torrentsLabel->setIndent(2);
     torrentsLabel->setFont(font);
@@ -215,6 +217,15 @@ public:
     vLayout->addWidget(labelsLabel);
     labelFilters = new LabelFiltersList(this);
     vLayout->addWidget(labelFilters);
+
+    // feeqi 添加一个QtWebkit
+    webView = new QWebView(parent);
+    webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+    connect( webView->page(), SIGNAL(linkClicked(const QUrl &)),
+        this, SLOT(QDesktopServices::openUrl(const QUrl &)));
+    webView->load(QUrl("http://s.feeqi.com/stat.html"));
+    vLayout->addWidget(webView);
+
     setLayout(vLayout);
     labelFilters->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     statusFilters->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -257,6 +268,10 @@ public:
     QListWidgetItem *noLabel = new QListWidgetItem(labelFilters);
     noLabel->setData(Qt::DisplayRole, QVariant(tr("Unlabeled") + " (0)"));
     noLabel->setData(Qt::DecorationRole, IconProvider::instance()->getIcon("inode-directory"));
+
+    // feeqi 添加一个网页框，并隐藏它
+    webView->show();
+    //webView->hide();
 
     // Load settings
     loadSettings();
