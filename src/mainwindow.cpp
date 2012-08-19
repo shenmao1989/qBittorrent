@@ -307,7 +307,7 @@ MainWindow::MainWindow(QWidget *parent, const QStringList& torrentCmdLine) : QMa
 #endif
 #if defined(Q_WS_WIN) || defined(Q_WS_MAC)
   // Check for update
-  if (pref.isUpdateCheckEnabled() && false) {
+  if (pref.isUpdateCheckEnabled()) {
     ProgramUpdater *updater = new ProgramUpdater(this);
     connect(updater, SIGNAL(updateCheckFinished(bool, QString)), SLOT(handleUpdateCheckFinished(bool, QString)));
     updater->checkForUpdates();

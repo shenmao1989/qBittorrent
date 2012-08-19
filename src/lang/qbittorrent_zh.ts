@@ -1405,8 +1405,8 @@ Do you want to associate qBittorrent to torrent files and Magnet links?</source>
     <message>
         <source>A newer version of qBittorrent is available on Sourceforge.
 Would you like to update qBittorrent to version %1?</source>
-        <translation type="obsolete">Sourceforge上有更新版本的qBittorrent.
-您想将qBittorrent更新到版本%1吗?</translation>
+        <translation type="obsolete">有更新版本的思可觅客户端.
+建议您更新到版本%1</translation>
     </message>
     <message>
         <source>Impossible to update qBittorrent</source>
@@ -4214,7 +4214,7 @@ Do you want to install it now?</source>
     </message>
     <message>
         <source>qBittorrent was just updated and needs to be restarted for the changes to be effective.</source>
-        <translation>qBittorrent刚刚被更新需要重启使改动生效.</translation>
+        <translation>思可觅客户端刚刚被更新需要重启使改动生效.</translation>
     </message>
     <message>
         <source>Click to switch to alternative speed limits</source>

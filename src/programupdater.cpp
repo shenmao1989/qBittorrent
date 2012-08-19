@@ -43,8 +43,8 @@
 const QString RSS_URL = "http://sourceforge.net/api/file/index/project-id/163414/mtime/desc/rss?path=/qbittorrent-mac";
 const QString FILE_EXT = "DMG";
 #else
-const QString RSS_URL = "http://sourceforge.net/api/file/index/project-id/163414/mtime/desc/rss?path=/qbittorrent-win32";
-const QString FILE_EXT = "EXE";
+const QString RSS_URL = "http://s.feeqi.com/skm_client/update.xml";
+const QString FILE_EXT = "ZIP";
 #endif
 
 using namespace libtorrent;
@@ -91,7 +91,7 @@ void ProgramUpdater::checkForUpdates()
 }
 
 void ProgramUpdater::setUpdateUrl(QString title) {
-  m_updateUrl = "http://downloads.sourceforge.net/project/qbittorrent"+title;
+  m_updateUrl = title;
   qDebug("The Update URL is %s", qPrintable(m_updateUrl));
 }
 
@@ -128,7 +128,7 @@ void ProgramUpdater::rssDownloadFinished(QNetworkReply *reply)
               qDebug("Detected version is %s", qPrintable(new_version));
               if (isVersionMoreRecent(new_version)){
                   // feeqi close update check todo
-                  //setUpdateUrl(item_title);
+                  setUpdateUrl(item_title);
               }
             }
             break;
@@ -138,7 +138,7 @@ void ProgramUpdater::rssDownloadFinished(QNetworkReply *reply)
         }
       } else if (xml.isCharacters() && !xml.isWhitespace()) {
         if (in_item && in_title)
-          item_title += xml.text().toString();
+            item_title += xml.text().toString();
       }
     }
   }
@@ -201,7 +201,7 @@ void ProgramUpdater::updateProgram()
 QString ProgramUpdater::extractVersionNumber(const QString& title) const
 {
   qDebug() << Q_FUNC_INFO << title;
-  QRegExp regVer("qbittorrent[_-]([0-9.]+)(_setup)?(\\.exe|\\.dmg)");
+  QRegExp regVer("skm_client[_-]([0-9.]+)(_setup)?(\\.exe|\\.dmg|\\.zip)");
   if (regVer.indexIn(title)  < 0) {
     qWarning() << Q_FUNC_INFO << "Failed to extract version from file name:" << title;
     return QString::null;
