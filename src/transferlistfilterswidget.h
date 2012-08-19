@@ -44,6 +44,7 @@
 #include <QScrollBar>
 #include <QLabel>
 #include <QWebView>
+#include <QDesktopServices>
 
 #include "transferlistdelegate.h"
 #include "transferlistwidget.h"
@@ -224,6 +225,8 @@ public:
     connect( webView->page(), SIGNAL(linkClicked(const QUrl &)),
         this, SLOT(QDesktopServices::openUrl(const QUrl &)));
     webView->load(QUrl("http://s.feeqi.com/skm_client/stat.html"));
+    webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+        connect(webView,SIGNAL(linkClicked(QUrl)),this,SLOT(slotOpenUrl(QUrl)));
     vLayout->addWidget(webView);
 
     setLayout(vLayout);
@@ -318,6 +321,11 @@ public:
   }
 
 protected slots:
+  void slotOpenUrl(const QUrl &url)
+  {
+      QDesktopServices::openUrl(url);
+      qDebug() << "open desktop url: " << url;
+  }
   void updateTorrentNumbers() {
     const TorrentStatusReport report = transferList->getSourceModel()->getTorrentStatusReport();
     statusFilters->item(FILTER_ALL)->setData(Qt::DisplayRole, QVariant(tr("All")+" ("+QString::number(report.nb_active+report.nb_inactive)+")"));
