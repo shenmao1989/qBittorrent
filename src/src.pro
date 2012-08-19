@@ -24,11 +24,11 @@ os2 {
 
 nox {
   QT -= gui
-  TARGET = qbittorrent-nox
+  TARGET = skm_client-nox
   DEFINES += DISABLE_GUI
 } else {
   QT += xml
-  TARGET = qbittorrent
+  TARGET = skm_client
 }
 QT += network
 QT += webkit
