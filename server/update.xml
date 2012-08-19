@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:files="http://sourceforge.net/api/files.rdf#" xmlns:media="http://video.search.yahoo.com/mrss/" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:sf="http://sourceforge.net/api/sfelements.rdf#" version="2.0">
+  <channel xmlns:files="http://sourceforge.net/api/files.rdf#" xmlns:media="http://video.search.yahoo.com/mrss/" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:sf="http://sourceforge.net/api/sfelements.rdf#">
+    <title><![CDATA[qBittorrent downloads]]></title>
+    <link>http://s.feeqi.com/skm_client/update.xml</link>
+    <description><![CDATA[Files from qBittorrent. An advanced and multi-platform BitTorrent client with a nice Qt4 user interface as well as a Web UI for remote control and an integrated search engine. qBittorrent aims to meet the needs of most users while using as little CPU and memory as possible.]]></description>
+    <pubDate>Sun, 19 Aug 2012 09:18:04 +0000</pubDate>
+    <managingEditor>qbittorrent@feeqi.com (feeqi)</managingEditor>
+    <generator><![CDATA[suna人工维护]]></generator>
+    <docs>http://www.feeqi.com/</docs>
+  
+    <item>
+      <title><![CDATA[http://s.feeqi.com/skm_client/win32/skm_client_1.2.0_setup.zip]]></title>>
+    </item>
+  </channel>
+</rss>
