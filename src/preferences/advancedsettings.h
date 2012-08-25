@@ -157,7 +157,7 @@ private slots:
     const Preferences pref;
     // Disk write cache
     spin_cache.setMinimum(1);
-    spin_cache.setMaximum(200);
+    spin_cache.setMaximum(1024);
     spin_cache.setValue(pref.diskCacheSize());
     spin_cache.setSuffix(tr(" MiB"));
     setRow(DISK_CACHE, tr("Disk write cache size"), &spin_cache);
