@@ -103,7 +103,7 @@ void TorrentCreatorThread::run() {
   try {
     file_storage fs;
     // Adding files to the torrent
-    libtorrent::add_files(fs, input_path.toUtf8().constData(), file_filter);
+    libtorrent::add_files(fs, input_path.toStdString(), file_filter);
     if (abort) return;
     create_torrent t(fs, piece_size);
 
@@ -117,7 +117,7 @@ void TorrentCreatorThread::run() {
     if (abort) return;
     // calculate the hash for all pieces
     const QString parent_path = fsutils::branchPath(input_path);
-    set_piece_hashes(t, parent_path.toUtf8().constData(), boost::bind<void>(&sendProgressUpdateSignal, _1, t.num_pieces(), this));
+    set_piece_hashes(t, parent_path.toStdString(), boost::bind<void>(&sendProgressUpdateSignal, _1, t.num_pieces(), this));
     // Set qBittorrent as creator and add user comment to
     // torrent_info structure
     t.set_creator(creator_str.toUtf8().constData());
