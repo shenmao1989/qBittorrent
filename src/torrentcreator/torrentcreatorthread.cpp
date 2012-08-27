@@ -103,7 +103,7 @@ void TorrentCreatorThread::run() {
   try {
     file_storage fs;
     // Adding files to the torrent
-    libtorrent::add_files(fs, input_path.toStdString(), file_filter);
+    libtorrent::add_files(fs, input_path.toUtf8().constData(), file_filter);
     if (abort) return;
     create_torrent t(fs, piece_size);
 
