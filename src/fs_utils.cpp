@@ -333,7 +333,7 @@ QString fsutils::branchPath(const QString& file_path, QString* removed)
   if (slashIndex >= 0) {
     if (removed)
       *removed = ret.mid(slashIndex + 1);
-    ret = ret.left(slashIndex);
+    ret = ret.left(slashIndex + 1);
   }
   return ret;
 }
