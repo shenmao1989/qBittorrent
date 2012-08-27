@@ -109,15 +109,15 @@ void TorrentCreatorThread::run() {
 
     // Add url seeds
     foreach (const QString &seed, url_seeds) {
-      t.add_url_seed(seed.trimmed().toStdString());
+      t.add_url_seed(seed.trimmed().toUtf8().constData());
     }
     foreach (const QString &tracker, trackers) {
-      t.add_tracker(tracker.trimmed().toStdString());
+      t.add_tracker(tracker.trimmed().toUtf8().constData());
     }
     if (abort) return;
     // calculate the hash for all pieces
     const QString parent_path = fsutils::branchPath(input_path);
-    set_piece_hashes(t, parent_path.toStdString(), boost::bind<void>(&sendProgressUpdateSignal, _1, t.num_pieces(), this));
+    set_piece_hashes(t, parent_path.toUtf8().constData(), boost::bind<void>(&sendProgressUpdateSignal, _1, t.num_pieces(), this));
     // Set qBittorrent as creator and add user comment to
     // torrent_info structure
     t.set_creator(creator_str.toUtf8().constData());

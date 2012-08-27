@@ -165,9 +165,7 @@ int main(int argc, char *argv[]) {
 #endif
 
   // feeqi 解决中文乱码
-  QTextCodec *codec = QTextCodec::codecForName("System");    //获取系统编码
-  QTextCodec::setCodecForLocale(codec);
-  QTextCodec::setCodecForCStrings(codec);
+  QTextCodec *codec = QTextCodec::codecForName("System");
   QTextCodec::setCodecForTr(codec);
 
   // Check if qBittorrent is already running for this user
