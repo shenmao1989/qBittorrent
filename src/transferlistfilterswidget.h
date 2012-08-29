@@ -224,7 +224,7 @@ public:
     webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
     connect( webView->page(), SIGNAL(linkClicked(const QUrl &)),
         this, SLOT(QDesktopServices::openUrl(const QUrl &)));
-    webView->load(QUrl("http://s.feeqi.com/skm_client/stat.html?verion=" + VERSION));
+    webView->load(QUrl("http://s.feeqi.com/skm_client/stat.html?verion="VERSION));
     webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
         connect(webView,SIGNAL(linkClicked(QUrl)),this,SLOT(slotOpenUrl(QUrl)));
     vLayout->addWidget(webView);
