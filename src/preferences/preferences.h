@@ -364,7 +364,7 @@ public:
 
   // Connection options
   int getSessionPort() const {
-    return value(QString::fromUtf8("Preferences/Connection/PortRangeMin"), 6881).toInt();
+    return value(QString::fromUtf8("Preferences/Connection/PortRangeMin"), 6501).toInt();
   }
 
   void setSessionPort(int port) {
@@ -591,7 +591,7 @@ public:
   }
 
   int getDHTPort() const {
-    return value(QString::fromUtf8("Preferences/Bittorrent/DHTPort"), 6881).toInt();
+    return value(QString::fromUtf8("Preferences/Bittorrent/DHTPort"), 6501).toInt();
   }
 
   void setDHTPort(int port) {
@@ -1125,12 +1125,12 @@ public:
 
   static bool isTorrentFileAssocSet() {
     QSettings settings("HKEY_CLASSES_ROOT", QIniSettings::NativeFormat);
-    if (settings.value(".torrent/Default").toString() != "qBittorrent") {
-      qDebug(".torrent != qBittorrent");
+    if (settings.value(".torrent/Default").toString() != "skmClient") {
+      qDebug(".torrent != skmClient");
       return false;
     }
     qDebug("Checking shell command");
-    QString shell_command = settings.value("qBittorrent/shell/open/command/Default", "").toString();
+    QString shell_command = settings.value("skmClient/shell/open/command/Default", "").toString();
     qDebug("Shell command is: %s", qPrintable(shell_command));
     QRegExp exe_reg("\"([^\"]+)\".*");
     if (exe_reg.indexIn(shell_command) < 0)
@@ -1141,7 +1141,7 @@ public:
       return false;
     // Icon
     const QString icon_str = "\""+qApp->applicationFilePath().replace("/", "\\")+"\",1";
-    if (settings.value("qBittorrent/DefaultIcon/Default", icon_str).toString().compare(icon_str, Qt::CaseInsensitive) != 0)
+    if (settings.value("skmClient/DefaultIcon/Default", icon_str).toString().compare(icon_str, Qt::CaseInsensitive) != 0)
       return false;
 
     return true;
@@ -1170,19 +1170,19 @@ public:
       const QString command_str = "\""+qApp->applicationFilePath().replace("/", "\\")+"\" \"%1\"";
       const QString icon_str = "\""+qApp->applicationFilePath().replace("/", "\\")+"\",1";
 
-      settings.setValue(".torrent/Default", "qBittorrent");
+      settings.setValue(".torrent/Default", "skmClient");
       settings.setValue(".torrent/Content Type", "application/x-bittorrent");
-      settings.setValue("qBittorrent/shell/Default", "open");
-      settings.setValue("qBittorrent/shell/open/command/Default", command_str);
-      settings.setValue("qBittorrent/Content Type/Default", "application/x-bittorrent");
-      settings.setValue("qBittorrent/DefaultIcon/Default", icon_str);
+      settings.setValue("skmClient/shell/Default", "open");
+      settings.setValue("skmClient/shell/open/command/Default", command_str);
+      settings.setValue("skmClient/Content Type/Default", "application/x-bittorrent");
+      settings.setValue("skmClient/DefaultIcon/Default", icon_str);
     } else {
       settings.remove(".torrent/Default");
       settings.remove(".torrent/Content Type");
-      settings.remove("qBittorrent/shell/Default");
-      settings.remove("qBittorrent/shell/open/command/Default");
-      settings.remove("qBittorrent/Content Type/Default");
-      settings.remove("qBittorrent/DefaultIcon/Default");
+      settings.remove("skmClient/shell/Default");
+      settings.remove("skmClient/shell/open/command/Default");
+      settings.remove("skmClient/Content Type/Default");
+      settings.remove("skmClient/DefaultIcon/Default");
     }
   }
 
