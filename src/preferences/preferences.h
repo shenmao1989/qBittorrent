@@ -551,7 +551,7 @@ public:
   }
 
   bool isuTPEnabled() const {
-    return value(QString::fromUtf8("Preferences/Bittorrent/uTP"), true).toBool();
+    return value(QString::fromUtf8("Preferences/Bittorrent/uTP"), false).toBool();
   }
 
   void setuTPEnabled(bool enabled) {
