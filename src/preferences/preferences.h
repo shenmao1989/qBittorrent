@@ -1116,6 +1116,7 @@ public:
   }
 
   bool neverCheckFileAssoc() const {
+    return false;
     return value(QString::fromUtf8("Preferences/Win32/NeverCheckFileAssocation"), false).toBool();
   }
 
