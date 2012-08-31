@@ -211,7 +211,7 @@ public:
   }
 
   bool useIncompleteFilesExtension() const {
-    return value(QString::fromUtf8("Preferences/Downloads/UseIncompleteExtension"), false).toBool();
+    return value(QString::fromUtf8("Preferences/Downloads/UseIncompleteExtension"), true).toBool();
   }
 
   void useIncompleteFilesExtension(bool enabled) {
@@ -235,7 +235,7 @@ public:
   }
 
   bool preAllocateAllFiles() const {
-    return value(QString::fromUtf8("Preferences/Downloads/PreAllocation"), false).toBool();
+    return value(QString::fromUtf8("Preferences/Downloads/PreAllocation"), true).toBool();
   }
 
   void preAllocateAllFiles(bool enabled) {
