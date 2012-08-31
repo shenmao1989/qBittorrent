@@ -229,12 +229,18 @@
      <property name="text">
       <string>Private (won't be distributed on DHT network if enabled)</string>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="checkStartSeeding">
      <property name="text">
       <string>Start seeding after creation</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
