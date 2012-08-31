@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt4 and libtorrent.
- * Copyright (C) 2010  Christophe Dumez
+ * Copyright (C) 2012  Christophe Dumez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,32 +28,48 @@
  * Contact : chris@qbittorrent.org
  */
 
-#ifndef TRACKERINFOS_H
-#define TRACKERINFOS_H
+#ifndef RSSPARSER_H
+#define RSSPARSER_H
 
-#include <QString>
+#include "rssarticle.h"
+#include <QMutex>
+#include <QQueue>
+#include <QThread>
+#include <QWaitCondition>
 
-class TrackerInfos {
+struct ParsingJob;
+
+class RssParser : public QThread
+{
+  Q_OBJECT
+
 public:
-  QString name_or_url;
-  QString last_message;
-  unsigned long num_peers;
+  explicit RssParser(QObject *parent = 0);
+  virtual ~RssParser();
 
-  //TrackerInfos() {}
-  TrackerInfos(const TrackerInfos &b)
-    : name_or_url(b.name_or_url)
-    , last_message(b.last_message)
-    , num_peers(b.num_peers)
-  {
-    Q_ASSERT(!name_or_url.isEmpty());
-  }
+signals:
+  void newArticle(const QString& feedUrl, const QVariantHash& rssArticle);
+  void feedTitle(const QString& feedUrl, const QString& title);
+  void feedParsingFinished(const QString& feedUrl, const QString& error);
 
-  TrackerInfos(QString name_or_url)
-    : name_or_url(name_or_url)
-    , last_message("")
-    , num_peers(0)
-  {
-  }
+public slots:
+  void parseRssFile(const QString& feedUrl, const QString& filePath);
+  void clearFeedData(const QString& feedUrl);
+
+protected:
+  virtual void run();
+  static QDateTime parseDate(const QString& string);
+  void parseRssArticle(QXmlStreamReader& xml, const QString& feedUrl);
+  void parseRSSChannel(QXmlStreamReader& xml, const QString& feedUrl);
+  void parseRSS(const ParsingJob& job);
+  void reportFailure(const ParsingJob& job, const QString& error);
+
+private:
+  bool m_running;
+  QMutex m_mutex;
+  QQueue<ParsingJob> m_queue;
+  QWaitCondition m_waitCondition;
+  QHash<QString/*feedUrl*/, QString/*lastBuildDate*/> m_lastBuildDates; // Optimization
 };
 
-#endif // TRACKERINFOS_H
+#endif // RSSPARSER_H

@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt4 and libtorrent.
- * Copyright (C) 2010  Christophe Dumez
+ * Copyright (C) 2006-2012  Christophe Dumez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,32 +28,53 @@
  * Contact : chris@qbittorrent.org
  */
 
-#ifndef TRACKERINFOS_H
-#define TRACKERINFOS_H
+#include "torrentcontentmodelfile.h"
+#include "torrentcontentmodelfolder.h"
+#include "fs_utils.h"
+#include "misc.h"
 
-#include <QString>
+TorrentContentModelFile::TorrentContentModelFile(const libtorrent::file_entry& f,
+                                                 TorrentContentModelFolder* parent,
+                                                 int file_index)
+  : TorrentContentModelItem(parent)
+  , m_fileIndex(file_index)
+{
+  Q_ASSERT(parent);
 
-class TrackerInfos {
-public:
-  QString name_or_url;
-  QString last_message;
-  unsigned long num_peers;
+#if LIBTORRENT_VERSION_MINOR >= 16
+  m_name = fsutils::fileName(misc::toQStringU(f.path.c_str()));
+#else
+  m_name = misc::toQStringU(f.path.filename());
+#endif
 
-  //TrackerInfos() {}
-  TrackerInfos(const TrackerInfos &b)
-    : name_or_url(b.name_or_url)
-    , last_message(b.last_message)
-    , num_peers(b.num_peers)
-  {
-    Q_ASSERT(!name_or_url.isEmpty());
-  }
+  // Do not display incomplete extensions
+  if (m_name.endsWith(".!qB"))
+    m_name.chop(4);
 
-  TrackerInfos(QString name_or_url)
-    : name_or_url(name_or_url)
-    , last_message("")
-    , num_peers(0)
-  {
-  }
-};
+  m_size = (qulonglong)f.size;
+}
 
-#endif // TRACKERINFOS_H
+int TorrentContentModelFile::fileIndex() const
+{
+  return m_fileIndex;
+}
+
+void TorrentContentModelFile::setPriority(int new_prio, bool update_parent)
+{
+  Q_ASSERT(new_prio != prio::MIXED);
+
+  if (m_priority == new_prio)
+    return;
+
+  m_priority = new_prio;
+
+  // Update parent
+  if (update_parent)
+    m_parentItem->updatePriority();
+}
+
+void TorrentContentModelFile::setProgress(qulonglong done)
+{
+  m_totalDone = done;
+  Q_ASSERT(m_totalDone <= m_size);
+}

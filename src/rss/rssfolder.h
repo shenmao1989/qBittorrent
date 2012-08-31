@@ -61,9 +61,10 @@ public:
   QHash<QString, RssFeedPtr> getAllFeedsAsHash() const;
   virtual QString displayName() const;
   virtual QString id() const;
+  virtual QIcon icon() const;
   bool hasChild(const QString &childId);
-  virtual RssArticleList articleList() const;
-  virtual RssArticleList unreadArticleList() const;
+  virtual RssArticleList articleListByDateDesc() const;
+  virtual RssArticleList unreadArticleListByDateDesc() const;
   virtual void removeAllSettings();
   virtual void saveItemsToDisk();
   void removeAllItems();
@@ -71,7 +72,7 @@ public:
   RssFilePtr takeChild(const QString &childId);
 
 public slots:
-  virtual void refresh();
+  virtual bool refresh();
   void addFile(const RssFilePtr& item);
   void removeChild(const QString &childId);
   virtual void rename(const QString &new_name);

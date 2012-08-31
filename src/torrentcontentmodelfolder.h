@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt4 and libtorrent.
- * Copyright (C) 2010  Christophe Dumez
+ * Copyright (C) 2006-2012  Christophe Dumez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,32 +28,39 @@
  * Contact : chris@qbittorrent.org
  */
 
-#ifndef TRACKERINFOS_H
-#define TRACKERINFOS_H
+#ifndef TORRENTCONTENTMODELFOLDER_H
+#define TORRENTCONTENTMODELFOLDER_H
 
-#include <QString>
+#include "torrentcontentmodelitem.h"
 
-class TrackerInfos {
+class TorrentContentModelFolder : public TorrentContentModelItem
+{
 public:
-  QString name_or_url;
-  QString last_message;
-  unsigned long num_peers;
+  // Folder constructor
+  TorrentContentModelFolder(const QString& name, TorrentContentModelFolder* parent);
 
-  //TrackerInfos() {}
-  TrackerInfos(const TrackerInfos &b)
-    : name_or_url(b.name_or_url)
-    , last_message(b.last_message)
-    , num_peers(b.num_peers)
-  {
-    Q_ASSERT(!name_or_url.isEmpty());
-  }
+  // Invisible root item constructor
+  TorrentContentModelFolder(const QList<QVariant>& data);
 
-  TrackerInfos(QString name_or_url)
-    : name_or_url(name_or_url)
-    , last_message("")
-    , num_peers(0)
-  {
-  }
+  ~TorrentContentModelFolder();
+
+  ItemType itemType() const { return FolderType; }
+
+  void increaseSize(qulonglong delta);
+  void recalculateProgress();
+  void updatePriority();
+
+  void setPriority(int new_prio, bool update_parent = true);
+
+  void deleteAllChildren();
+  const QList<TorrentContentModelItem*>& children() const;
+  void appendChild(TorrentContentModelItem* item);
+  TorrentContentModelItem* child(int row) const;
+  TorrentContentModelFolder* childFolderWithName(const QString& name) const;
+  int childCount() const;
+
+private:
+  QList<TorrentContentModelItem*> m_childItems;
 };
 
-#endif // TRACKERINFOS_H
+#endif // TORRENTCONTENTMODELFOLDER_H

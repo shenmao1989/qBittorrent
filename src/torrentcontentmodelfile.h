@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt4 and libtorrent.
- * Copyright (C) 2010  Christophe Dumez
+ * Copyright (C) 2006-2012  Christophe Dumez
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,32 +28,25 @@
  * Contact : chris@qbittorrent.org
  */
 
-#ifndef TRACKERINFOS_H
-#define TRACKERINFOS_H
+#ifndef TORRENTCONTENTMODELFILE_H
+#define TORRENTCONTENTMODELFILE_H
 
-#include <QString>
+#include "torrentcontentmodelitem.h"
 
-class TrackerInfos {
+class TorrentContentModelFile : public TorrentContentModelItem
+{
 public:
-  QString name_or_url;
-  QString last_message;
-  unsigned long num_peers;
+  TorrentContentModelFile(const libtorrent::file_entry& f,
+                          TorrentContentModelFolder* parent,
+                          int file_index);
 
-  //TrackerInfos() {}
-  TrackerInfos(const TrackerInfos &b)
-    : name_or_url(b.name_or_url)
-    , last_message(b.last_message)
-    , num_peers(b.num_peers)
-  {
-    Q_ASSERT(!name_or_url.isEmpty());
-  }
+  int fileIndex() const;
+  void setPriority(int new_prio, bool update_parent = true);
+  void setProgress(qulonglong done);
+  ItemType itemType() const { return FileType; }
 
-  TrackerInfos(QString name_or_url)
-    : name_or_url(name_or_url)
-    , last_message("")
-    , num_peers(0)
-  {
-  }
+private:
+  int m_fileIndex;
 };
 
-#endif // TRACKERINFOS_H
+#endif // TORRENTCONTENTMODELFILE_H

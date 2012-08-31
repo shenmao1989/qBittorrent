@@ -277,9 +277,21 @@ void HttpConnection::respond() {
     }
     if (list[0] == "command") {
       const QString& command = list[1];
-      respondCommand(command);
-      m_generator.setStatusLine(200, "OK");
-      write();
+      if (command == "shutdown") {
+        qDebug() << "Shutdown request from Web UI";
+        // Special case handling for shutdown, we
+        // need to reply to the Web UI before
+        // actually shutting down.
+        m_generator.setStatusLine(200, "OK");
+        write();
+        qApp->processEvents();
+        // Exit application
+        qApp->exit();
+      } else {
+        respondCommand(command);
+        m_generator.setStatusLine(200, "OK");
+        write();
+      }
       return;
     }
   }

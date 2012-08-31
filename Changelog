@@ -1,3 +1,9 @@
+* unreleased - - Christophe Dumez <chris@qbittorrent.org> - v3.1.0
+    - FEATURE: Add command line option to daemonize qbittorrent-nox (ngaro)
+    - FEATURE: Add "Shutdown qBittorrent" button to Web UI (ngaro)
+    - FEATURE: Add setting to copy .torrent files for finished downloads (Driim)
+    - BUGFIX: Greatly improve RSS manager performance (closes #34)
+
 * Thu Aug 09 2012 - Christophe Dumez <chris@qbittorrent.org> - v3.0.0
     - FEATURE: Brand new torrent addition dialog
     - FEATURE: Add the ability to choose the save path when using magnet links (mutoso)
