@@ -455,6 +455,7 @@ void QBtSession::configureSession() {
         mac = iface.hardwareAddress();
         addConsoleMessage("NetWorkInterface Mac Address:" + mac);
         if(mac_check.exactMatch(mac)) continue;
+        addConsoleMessage("NetWorkInterface Mac Address NOT VirtualBox:" + mac);
 
         //获取连接地址列表
         QList<QNetworkAddressEntry> addressEntriesList = iface.addressEntries();
@@ -468,6 +469,9 @@ void QBtSession::configureSession() {
                 addConsoleMessage("autoAddress got ip is:" + (*j).ip().toString());
                 break;
              }
+        }
+        if (!announce_ip.isEmpty()){
+            break;
         }
       }
   }
