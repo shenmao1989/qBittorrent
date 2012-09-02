@@ -440,7 +440,7 @@ void QBtSession::configureSession() {
   QString announce_ip = pref.getNetworkAddress();
   //feeqi 如果指定获取本地局域网ip，然么强制设定为当前活动网卡的ip
   bool autoAddress = pref.getAutoAddress();
-  QRegExp ipv4_check("^(10|172)\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+  QRegExp ipv4_check("^(10|172|192)\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
   if(autoAddress && announce_ip == ""){
       foreach (const QNetworkInterface& iface, QNetworkInterface::allInterfaces()) {
         if (iface.flags() & QNetworkInterface::IsLoopBack) continue;
@@ -450,7 +450,9 @@ void QBtSession::configureSession() {
         for (QList<QNetworkAddressEntry>::const_iterator j = addressEntriesList.constBegin(); j != addressEntriesList.constEnd(); ++j) {
             if(ipv4_check.exactMatch((*j).ip().toString())){
                 announce_ip = (*j).ip().toString();
-                pref.setNetworkAddress(announce_ip);
+                //pref.setNetworkAddress(announce_ip);
+                //为了区分是自动获取还是用户自己设置的，在IP前加一个前缀，在libtorrent中做处理
+                announce_ip = "LOCAL:" + announce_ip;
                 break;
                 //输出 ip
                 qDebug() << "autoAddress got ip is:" << (*j).ip().toString();
