@@ -1034,7 +1034,7 @@ public:
   }
 
   bool getAutoAddress() const {
-    return value(QString::fromUtf8("Preferences/Connection/AutoAddress"), false).toBool();
+    return value(QString::fromUtf8("Preferences/Connection/AutoAddress"), true).toBool();
   }
 
   void setAutoAddress(bool resolve) {
