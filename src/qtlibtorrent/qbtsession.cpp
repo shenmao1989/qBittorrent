@@ -441,10 +441,21 @@ void QBtSession::configureSession() {
   //feeqi 如果指定获取本地局域网ip，然么强制设定为当前活动网卡的ip
   bool autoAddress = pref.getAutoAddress();
   QRegExp ipv4_check("^(10|172|192)\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+  QString mac;
+  QRegExp mac_check("^(00:05:69|00:0C:29|00:1C:14|00:50:56|08:00:27|00:1C:42)");
   if(autoAddress && announce_ip == ""){
       foreach (const QNetworkInterface& iface, QNetworkInterface::allInterfaces()) {
         if (iface.flags() & QNetworkInterface::IsLoopBack) continue;
         if (!(iface.flags() & QNetworkInterface::IsUp)) continue;
+
+        //根据mac去掉虚拟机的网卡
+        //vmware 00:05:69 00:0C:29 00:1C:14 00:50:56
+        //virtualBox 08:00:27
+        //parallels 00:1C:42
+        mac = iface.hardwareAddress();
+        addConsoleMessage("NetWorkInterface Mac Address:" + mac);
+        if(mac_check.exactMatch(mac)) continue;
+
         //获取连接地址列表
         QList<QNetworkAddressEntry> addressEntriesList = iface.addressEntries();
         for (QList<QNetworkAddressEntry>::const_iterator j = addressEntriesList.constBegin(); j != addressEntriesList.constEnd(); ++j) {
@@ -453,10 +464,10 @@ void QBtSession::configureSession() {
                 //pref.setNetworkAddress(announce_ip);
                 //为了区分是自动获取还是用户自己设置的，在IP前加一个前缀，在libtorrent中做处理
                 announce_ip = "LOCAL:" + announce_ip;
-                break;
                 //输出 ip
-                qDebug() << "autoAddress got ip is:" << (*j).ip().toString();
-            }
+                addConsoleMessage("autoAddress got ip is:" + (*j).ip().toString());
+                break;
+             }
         }
       }
   }
